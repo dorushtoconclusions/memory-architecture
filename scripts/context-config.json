@@ -1,0 +1,33 @@
+{
+  "summarize-weekly": {
+    "schedule": "0 3 * * 0",
+    "model": "sonnet",
+    "prompt": "scripts/summarize-weekly.md",
+    "output": "memory/summaries/",
+    "retryAfterMin": 60,
+    "errorLog": "memory/summaries/errors.log"
+  },
+  "summarize-monthly": {
+    "schedule": "0 4 1 * *",
+    "model": "sonnet",
+    "prompt": "scripts/summarize-monthly.md",
+    "output": "memory/summaries/",
+    "retryAfterMin": 60,
+    "errorLog": "memory/summaries/errors.log"
+  },
+  "generate-context": {
+    "schedule": "0 5 * * *",
+    "model": "haiku",
+    "prompt": "scripts/generate-context.md",
+    "output": "CONTEXT.md",
+    "retryAfterMin": 30,
+    "errorLog": "memory/summaries/errors.log"
+  },
+  "quarterly-synthesis": {
+    "enabled": false,
+    "gateCondition": "context_window >= 500000",
+    "schedule": "0 5 1 1,4,7,10 *",
+    "model": "sonnet",
+    "note": "Gated per C-008. Enable when context windows reach 500K."
+  }
+}
